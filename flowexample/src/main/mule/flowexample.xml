@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6cc63212-a1fe-4d70-9897-fb63654d3b60">
+		<http:listener-connection host="localhost" port="5050" />
+	</http:listener-config>
+	<flow name="AsyncFlowDeclaration" doc:id="5d64cdde-570f-48de-92fc-f962209e7c0e" >
+		<async doc:name="Async" doc:id="8d2734c6-a1d8-429e-87e8-b84cff09d7aa" >
+			<logger level="INFO" doc:name="asynclog1" doc:id="7e2d0a0d-afb7-441a-b2ea-9692385acffe" message="Flow is in async 1"/>
+			<logger level="INFO" doc:name="async Logger 2" doc:id="1ecc1755-3a23-4b38-affa-e94c05cb2248" message="Flow is in ASync 2"/>
+		</async>
+	</flow>
+	<flow name="helloFlow" doc:id="31b7b5d8-1426-4753-a1cb-2627820cd5f7" >
+		<http:listener doc:name="Listener" doc:id="3e9d69a1-5925-47ac-8d69-47e7998f22c4" config-ref="HTTP_Listener_config" path="/mule" allowedMethods="GET"/>
+		<flow-ref doc:name="subFlow" doc:id="0fbc7363-9b92-4b94-9abb-99ea8aaf03ab" name="flowexampleSub_Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2833bb01-6bc2-4679-9b29-28e94456b148" message="Print Main Flow"/>
+		<flow-ref doc:name="Private Flow" doc:id="12f977fa-67ed-4b45-8c84-730cfa1d2bf2" name="flowexampleFlow"/>
+		<flow-ref doc:name="AsyncFlowReference" doc:id="b73099e2-f0af-4cc1-8fa2-d0972f8b3d6c" name="AsyncFlowDeclaration"/>
+		<logger level="INFO" doc:name="Logger" doc:id="77231f15-ead2-4438-98d6-6e55576ad941" message="End of Main flow"/>
+	</flow>
+	<sub-flow name="flowexampleSub_Flow" doc:id="46723501-4350-4fa5-acc1-f4d1f84dde51" >
+		<logger level="INFO" doc:name="Logger" doc:id="d6163961-2133-4a4d-8b06-cb76b7ae65bd" message="prints First sub flow"/>
+	</sub-flow>
+	<flow name="flowexampleFlow" doc:id="e0304f0f-f234-4e2b-bc70-ac3a1e467259" >
+		<logger level="INFO" doc:name="Private Flow Logger" doc:id="16e54138-dd80-407f-af58-435cd08dd2ae" message="This is private flow"/>
+	</flow>
+</mule>

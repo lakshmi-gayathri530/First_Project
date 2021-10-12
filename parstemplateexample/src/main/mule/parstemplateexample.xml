@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="dfa471a7-573a-437f-b3b5-b5d69f13de98">
+		<http:listener-connection host="localhost" port="3030" />
+	</http:listener-config>
+	<flow name="parstemplateexampleFlow" doc:id="52c48943-e186-4ed5-9e7a-7088213bd0d0" >
+		<http:listener doc:name="ParseTemplateListener" doc:id="56a80ce8-2fb2-4566-9a47-6ecf67f14290" config-ref="HTTP_Listener_config" path="gayathri" allowedMethods="POST"/>
+		<parse-template doc:name="Parse Template" doc:id="5c79e1c2-006a-455c-9f22-a2052d763e3a" location="C:\Users\GAYATHRI N\Downloads\123.txt"/>
+	</flow>
+</mule>

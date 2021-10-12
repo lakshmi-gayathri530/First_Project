@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b55b4207-664f-4152-a419-5f70a9326d89" >
+		<http:listener-connection host="localhost" port="5050" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="db042179-6b1e-4617-8152-cce40b94e592" >
+		<file:connection workingDir="${app.home}" />
+	</file:config>
+	<flow name="fileconnectorsFlow" doc:id="ce9bc7e4-ba7f-4e73-b23e-07114ea9bc11" >
+		<http:listener doc:name="Listener" doc:id="65ddde6b-5a35-4194-9100-94b8662993d2" config-ref="HTTP_Listener_config" path="/fileDelete"/>
+		<file:delete doc:name="Delete" doc:id="55ee52c0-5f60-4df1-be3d-8675745adb33" config-ref="File_Config" path="MyFiles/test.txt"/>
+		<logger level="INFO" doc:name="Logger" doc:id="6ede84d2-80ba-490b-85e3-394568a61086" message="file deleted Sucessfully!!!"/>
+	</flow>
+</mule>
