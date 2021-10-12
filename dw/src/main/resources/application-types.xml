@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="dwid" format="json">
+      <types:shape format="weave" example="car.json"><![CDATA[%dw 2.0
+
+type dwid = {|
+  name: String, 
+  model: String, 
+  price: Number {"typeId": "int"}, 
+  GST: Number {"typeId": "int"}, 
+  status: String, 
+  discount: Number {"typeId": "int"}
+|} {"example": "{\\\"name\\\":\\\"BMW\\\",\\\"model\\\":\\\"x5\\\",\\\"price\\\":1000000,\\\"GST\\\":180,\\\"status\\\":\\\"available\\\",\\\"discount\\\":50}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#97a7bf95-7a99-4948-8586-555aa3d2aa20">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="dwid"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="dwid"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

@@ -1,0 +1,8 @@
+{
+ "name":"BMW",
+ "model":"x5",
+ "price":1000000,
+ "GST":180,
+ "status":"available",
+ "discount":50
+ }
